@@ -1,1 +1,1 @@
-# likes
+# Дипломная работа Skillbox по курсу "Javascript с нуля"
