@@ -2,21 +2,35 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PhotosList from '../components/photos-list';
-// import CommentsList from '../components/comments-list';
-// import AddComment from '../components/add-comment';
-
 import { addPhotos } from '../actions';
+import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 
 let App = (props) => {
-    const {
-        photos, addPhotos
-    } = props;
+  const {
+    photos, addPhotos
+  } = props;
 
-    return (
+  return (
+    <Router
+      hashType={'noslash'}
+    >
+      <div>
+          <PhotosList photos={photos} addPhotos={addPhotos} />
+      </div>
+      <Switch>
+      <Route path='/' exact>
         <div>
-            <PhotosList photos={photos} addPhotos={addPhotos} />
+          <h3>Home</h3>
         </div>
-    )
+      </Route>
+      <Route path='/about'>
+        <div>
+          <h3>About</h3>
+        </div>
+      </Route>
+      </Switch>
+    </Router>
+  )
 }
 
 const mapStateToProps = (state) => {

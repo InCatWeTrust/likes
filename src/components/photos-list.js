@@ -7,6 +7,7 @@ const PhotosList = (props) => {
   const newLink = 'link';
   const newPhoto = 'another photo';
   const newLikes = 99;
+  console.log(photos)
 
   return (
     <div

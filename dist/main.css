@@ -1,7 +1,51 @@
-li {
-    color: red;
+button {
+	border: none;
+	cursor: pointer;
+	outline: none;
 }
 
-.checked {
-    color: green;
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.container {
+	max-width: 1600px;
+	margin: 0 auto;
+  padding: 0 260px;
+}
+
+.photos-list {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.photos-list__photo {
+	width: 30%;
+	margin-bottom: 50px;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.photos-list__photo:not(:nth-child(3n)) {
+	margin-right: 5%;
+}
+
+.btn {
+	width: 150px;
+	height: 50px;
+	border: 1px solid black;
+	border-radius: 25px;
+	font-weight: 600;
+	background-color: rgba(250, 150, 0, 0.8);
+	transition-property: background-color, border-color, color;
+	transition-duration: 200ms;
+	transition-timing-function: ease;
+}
+
+.btn:hover {
+	border-color: rgba(250, 150, 0, 0.5);
+	color: rgb(250, 150, 0);
+	background-color: black;
 }

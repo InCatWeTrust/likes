@@ -15,4 +15,4 @@ const photos = (state = [], action) => {
   };
 };
   
-  export default photos;
+export default photos;

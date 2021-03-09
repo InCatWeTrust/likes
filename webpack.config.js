@@ -8,6 +8,7 @@ module.exports = {
     output: {
         filename: 'build.js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
     },
 
     plugins: [
@@ -16,6 +17,7 @@ module.exports = {
 
     devServer: {
         contentBase: './dist',
+        historyApiFallback: true,
     },
 
     module: {
