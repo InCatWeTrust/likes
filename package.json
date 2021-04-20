@@ -4,14 +4,17 @@
   "description": "Simple react app",
   "private": true,
   "dependencies": {
+    "node-fetch": "^2.6.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "unsplash-js": "^7.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
@@ -25,7 +28,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "serve": "webpack serve --open",
+    "start": "webpack serve --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

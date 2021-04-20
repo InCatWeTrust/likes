@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Code from '../components/auth';
 import PhotosList from '../components/photos-list';
 import { addPhotos } from '../actions';
-import { Route, Switch, HashRouter as Router } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
 let App = (props) => {
   const {
@@ -12,17 +13,13 @@ let App = (props) => {
 
   return (
     <Router
-      hashType={'noslash'}
+      hashType={'slash'}
     >
       <div>
           <PhotosList photos={photos} addPhotos={addPhotos} />
       </div>
       <Switch>
-      <Route path='/' exact>
-        <div>
-          <h3>Home</h3>
-        </div>
-      </Route>
+      <Route path='/auth'></Route>
       <Route path='/about'>
         <div>
           <h3>About</h3>
@@ -35,7 +32,7 @@ let App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    photos: state
+    photos: state.photos
   }
 }
 
