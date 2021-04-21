@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Code from '../components/auth';
 import PhotosList from '../components/photos-list';
-import { addPhotos } from '../actions';
+import Auth from '../components/auth';
+import Header from '../components/header';
+import { addPhotos, getToken } from '../actions';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
 let App = (props) => {
   const {
-    photos, addPhotos
+    photos, addPhotos, token, getToken
   } = props;
 
   return (
@@ -16,29 +17,32 @@ let App = (props) => {
       hashType={'slash'}
     >
       <div>
-          <PhotosList photos={photos} addPhotos={addPhotos} />
+        <Header token={token} />
+        <PhotosList photos={photos} addPhotos={addPhotos} />
+        <Switch>
+          <Route path='/auth'><Auth token={token} getToken={getToken} /></Route>
+          <Route path='/about'>
+            <div>
+              <h3>About</h3>
+            </div>
+          </Route>
+        </Switch>
       </div>
-      <Switch>
-      <Route path='/auth'></Route>
-      <Route path='/about'>
-        <div>
-          <h3>About</h3>
-        </div>
-      </Route>
-      </Switch>
     </Router>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    photos: state.photos
+    photos: state.photos,
+    token: state.token,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addPhotos: (newName, newLink, newPhoto, newLikes) => dispatch(addPhotos(newName, newLink, newPhoto, newLikes)),
+    getToken: (token) => dispatch(getToken(token)),
   }
 }
 

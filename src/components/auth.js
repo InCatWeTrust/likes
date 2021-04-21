@@ -1,51 +1,47 @@
 import React from 'react';
-import Unsplash from 'unsplash-js';
 
-// const code = location.search.split('code=')[1];
+const Auth = (props) => {
+    const { token, getToken } = props;
+    console.log(`Token - ${token}`);
 
-// if (code) {
-//   const url = 'https://unsplash.com/oauth/token';
+    const code = location.search.split('code=')[1];
+    
+    if (code && !token) {
+        const url = 'https://unsplash.com/oauth/token';
+    
+        const getResourse = async () => {
+            const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                client_id: "010bPX24fabO7QjQIbd9bLcVQjHxcAeOVb6IzCYTNl0",
+                client_secret: "aJ5ecEg3pWnsJ_mzbAAntUPX2GKfaVr6lM0TwgDZ8I0",
+                redirect_uri: "http://localhost:8080/auth",
+                code: code,
+                grant_type: "authorization_code",
+            }),
+            });
 
-//   const getResourse = async () => {
-//     const response = await fetch(url, {
-//       method: "POST",
-//       body: JSON.stringify({
-//         "client_id": "010bPX24fabO7QjQIbd9bLcVQjHxcAeOVb6IzCYTNl0",
-//         "client_secret": "aJ5ecEg3pWnsJ_mzbAAntUPX2GKfaVr6lM0TwgDZ8I0",
-//         "redirect_uri": "http://localhost:8080/auth",
-//         "code": code,
-//         "grant_type": "authorization_code"
-//       }),
-//     });
+            if (response.status === 400) {
+                window.location.assign('http://localhost:8080');
+            } else if (!response.ok) {
+            throw new Error(`Ошибка со статус кодом ${response.status}`)
+            }
 
-//     if (!response.ok) {
-//       throw new Error(`Ошибка со статус кодом ${response.status}`)
-//     }
+            const accessToken = await response.json();
+            const tokenName = accessToken["access_token"];
+    
+            getToken(tokenName);
+        }
+    
+        getResourse();
+    } 
 
-//     console.log(response);
-//   }
+    return (
+        <div></div>
+    )
+}
 
-//   getResourse();
-// }
-
-// console.log(code);
-
-// const Code = () => {
-//   return (
-//       <div></div>
-//   )
-// }
-
-// export default Code;
-
-// let res = await ('https://unsplash.com/oauth/token', {
-//         headers: {
-//             clientId: "",
-//             clientSecret: "",
-//             redirectUri: "",
-//             code: code,
-//             grant_type: "authorization_code"
-//         }
-//     }) .then(res =>
-//         res.json())
-//         .then(console.log(res))
+export default Auth;

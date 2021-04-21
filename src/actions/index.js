@@ -1,12 +1,11 @@
-import  { v4 } from 'uuid';
+// import  { v4 } from 'uuid';
 let newId = 2;
+
 export const getDate = () => {
   const currentDate = new Date();
   const date = currentDate.getDate() + '.' + (currentDate.getMonth() + 1) + '.' + currentDate.getFullYear() + ' ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
   return date; 
-};
-
-// action creators
+}
 
 export const addPhotos = (newName, newLink, newPhoto, newLikes) => {
   return {
@@ -20,9 +19,9 @@ export const addPhotos = (newName, newLink, newPhoto, newLikes) => {
   }
 }
 
-// export const removeComment = (id) => {
-//   return {
-//     type: 'REMOVE_COMMENT',
-//     id: id
-//   }
-// }
+export const getToken = (tokenName) => {
+  return {
+    type: 'GET_TOKEN',
+    token: tokenName,
+  }
+}
