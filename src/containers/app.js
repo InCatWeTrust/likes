@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PhotosList from '../components/photos-list';
 import Auth from '../components/auth';
 import Header from '../components/header';
+import Photo from '../components/photo';
 import { addPhotos, getToken } from '../actions';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
@@ -21,11 +22,7 @@ let App = (props) => {
         <PhotosList photos={photos} addPhotos={addPhotos} />
         <Switch>
           <Route path='/auth'><Auth token={token} getToken={getToken} /></Route>
-          <Route path='/about'>
-            <div>
-              <h3>About</h3>
-            </div>
-          </Route>
+          <Route path='/photo'><Photo /></Route>
         </Switch>
       </div>
     </Router>
