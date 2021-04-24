@@ -6,7 +6,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 let pageNumber = 1;
 
 const PhotosList = (props) => {
-  const { photos, addPhotos } = props;
+  const { photos, addPhotos, getCurrentPhoto } = props;
   let list = [];
 
   async function getList(page) {
@@ -15,6 +15,7 @@ const PhotosList = (props) => {
     });
 
     unsplash.photos.list({page: page}).then(result => {
+
       result.response.results.map(photo => {
         let sameId = false;
 
@@ -35,9 +36,10 @@ const PhotosList = (props) => {
           photo: photo.urls.small,
           likes: photo.likes,
           date: photo["created_at"].slice(0, photo["created_at"].indexOf('T')).split('-'),
+          fullPhoto: photo.urls.full,
+          liked: photo["liked_by_user"],
         })
       });
-      console.log(list);
       addPhotos(list);
 
       list = [];
@@ -80,7 +82,12 @@ const PhotosList = (props) => {
                 >
                   {photo.name}
                 </a>
-                <Link to='/photo'><img
+                <Link
+                  to='/photo'
+                  onClick={() => {
+                    getCurrentPhoto(photo.id);
+                  }}
+                ><img
                   className={'photos-list__img'}
                   src={photo.photo}
                 >

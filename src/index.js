@@ -6,11 +6,11 @@ import './style.css';
 import App from './containers/app';
 import { createStore } from 'redux';
 import redusers from './reducers';
-import { getDate } from './actions';
 
 const initialState = {
   photos: [],
   token: '',
+  id: '',
 };
 
 const store = createStore(redusers, initialState);

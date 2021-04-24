@@ -5,12 +5,12 @@ import PhotosList from '../components/photos-list';
 import Auth from '../components/auth';
 import Header from '../components/header';
 import Photo from '../components/photo';
-import { addPhotos, getToken } from '../actions';
+import { addPhotos, getToken, getCurrentPhoto, getLikes } from '../actions';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
 let App = (props) => {
   const {
-    photos, addPhotos, token, getToken
+    photos, addPhotos, token, getToken, id, getCurrentPhoto, getLikes
   } = props;
 
   return (
@@ -19,10 +19,10 @@ let App = (props) => {
     >
       <div>
         <Header token={token} />
-        <PhotosList photos={photos} addPhotos={addPhotos} />
+        <PhotosList photos={photos} addPhotos={addPhotos} getCurrentPhoto={getCurrentPhoto} />
         <Switch>
-          <Route path='/auth'><Auth token={token} getToken={getToken} /></Route>
-          <Route path='/photo'><Photo /></Route>
+          <Route path='/auth'><Auth token={token} getToken={getToken} photos={photos} /></Route>
+          <Route path='/photo'><Photo photos={photos} id={id} token={token} getLikes={getLikes} /></Route>
         </Switch>
       </div>
     </Router>
@@ -33,6 +33,7 @@ const mapStateToProps = (state) => {
   return {
     photos: state.photos,
     token: state.token,
+    id: state.id,
   }
 }
 
@@ -40,6 +41,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addPhotos: (newName, newLink, newPhoto, newLikes) => dispatch(addPhotos(newName, newLink, newPhoto, newLikes)),
     getToken: (token) => dispatch(getToken(token)),
+    getCurrentPhoto: (id) => dispatch(getCurrentPhoto(id)),
+    getLikes: (id, likes) => dispatch(getLikes(id, likes)),
   }
 }
 
