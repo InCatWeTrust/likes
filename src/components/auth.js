@@ -16,7 +16,7 @@ const Auth = (props) => {
     body: JSON.stringify({
         client_id: "010bPX24fabO7QjQIbd9bLcVQjHxcAeOVb6IzCYTNl0",
         client_secret: "aJ5ecEg3pWnsJ_mzbAAntUPX2GKfaVr6lM0TwgDZ8I0",
-        redirect_uri: "http://likes.tmweb.ru/auth",
+        redirect_uri: "http://localhost:8080/auth",
         code: code,
         grant_type: "authorization_code",
     }),

@@ -112,13 +112,13 @@ a {
   align-self: center;
   display: flex;
   position: relative;
-  width: 200px;
+  width: 400px;
   height: 100%;
 	margin-bottom: 50px;
 }
 
 .photos-list__photo:not(:nth-child(3n)) {
-  margin-right: 20%;
+  margin-right: 5%;
 }
 
 .photos-list__link {
@@ -382,5 +382,31 @@ a {
   font-size: 20px;
   background-color: white;
   transform: translateY(-4px);
+}
+
+@media (max-width: 1400px) {
+  .photos-list {
+    justify-content: space-between;
+  }
+
+  .photos-list__photo:not(:nth-child(3n)) {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 1299px) {
+  .photos-list__photo:not(:nth-child(2n)) {
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 859px) {
+  .photos-list {
+    justify-content: center;
+  }
+
+  .photos-list__photo:not(:nth-child(2n)) {
+    margin-right: 0;
+  }
 }
 
