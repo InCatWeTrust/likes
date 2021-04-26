@@ -3,7 +3,7 @@ import React from 'react';
 const Header = (props) => {
   const { token } = props;
 
-  const url = 'https://unsplash.com/oauth/authorize?client_id=010bPX24fabO7QjQIbd9bLcVQjHxcAeOVb6IzCYTNl0&redirect_uri=http://localhost:8080/auth&response_type=code&scope=public+write_likes';
+  const url = 'https://unsplash.com/oauth/authorize?client_id=010bPX24fabO7QjQIbd9bLcVQjHxcAeOVb6IzCYTNl0&redirect_uri=http://likes.tmweb.ru/auth&response_type=code&scope=public+write_likes';
 
   function authorizate() {
     window.location.assign(url);
