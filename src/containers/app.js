@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PhotosList from '../components/photos-list';
-import Auth from '../components/auth';
 import Header from '../components/header';
 import Photo from '../components/photo';
 import { addPhotos, getToken, getCurrentPhoto, getLikes } from '../actions';
@@ -19,9 +18,8 @@ let App = (props) => {
     >
       <div>
         <Header token={token} />
-        <PhotosList photos={photos} addPhotos={addPhotos} getCurrentPhoto={getCurrentPhoto} />
+        <PhotosList photos={photos} addPhotos={addPhotos} getCurrentPhoto={getCurrentPhoto} token={token} getToken={getToken} />
         <Switch>
-          <Route path='/auth'><Auth token={token} getToken={getToken} photos={photos} /></Route>
           <Route path='/photo'><Photo photos={photos} id={id} token={token} getLikes={getLikes} /></Route>
         </Switch>
       </div>
