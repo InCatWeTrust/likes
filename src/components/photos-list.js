@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createApi } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Loader from './loader';
 
 const PhotosList = (props) => {
   const { photos, addPhotos, getCurrentPhoto, token, getToken } = props;
