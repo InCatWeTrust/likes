@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 function Photo(props) {
   const { photos, id, token, getLikes } = props;
   let photo;
   let likeClass = '';
+
+  const photoRef = useRef('');
+  const preloaderRef = useRef('');
 
   if (!id) {
     window.location.assign('/');
@@ -28,7 +31,7 @@ function Photo(props) {
   });
 
   function enableScroll() {
-    document.body.style.overflowY = ''
+    document.body.style.overflowY = '';
   }
 
   async function like() {
@@ -65,9 +68,14 @@ function Photo(props) {
     <div
       className={'photo'}
     >
+      <div ref={preloaderRef} className={'preloader-container'}>
+        <div className={'preloader'}><div></div><div></div></div>
+      </div>
       <Link to='/' onClick={enableScroll}><div className={'close'}></div></Link>
       <div
         className={'photo-container'}
+        ref={photoRef}
+        style={{opacity: 0, transition: 'opacity 500ms ease'}}
       >
         <div
           className={'photo-container__head'}
@@ -94,6 +102,12 @@ function Photo(props) {
         <Link to='/' onClick={enableScroll}><img
           className={'photo-container__photo'}
           src={photo.photo}
+          onLoad={() => {
+            photoRef.current.style.opacity = '1';
+            setTimeout(() => {
+              preloaderRef.current.style.opacity = '0';
+            }, 200)
+          }}
         ></img></Link>
         <div
           className={'photo-container__bottom'}

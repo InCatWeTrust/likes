@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createApi } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
-let pageNumber = 1;
+import Loader from './loader';
 
 const PhotosList = (props) => {
   const { photos, addPhotos, getCurrentPhoto, token, getToken } = props;
   let list = [];
+
+  const pageNumber = useRef(1);
+  const preloaderRef = useRef('');
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      preloaderRef.current.style.opacity = '0';
+      preloaderRef.current.style.pointerEvents = 'none';
+    }, 300)
+  })
 
   const code = location.search.split('code=')[1];
 
@@ -22,7 +31,7 @@ const PhotosList = (props) => {
     body: JSON.stringify({
         client_id: "010bPX24fabO7QjQIbd9bLcVQjHxcAeOVb6IzCYTNl0",
         client_secret: "aJ5ecEg3pWnsJ_mzbAAntUPX2GKfaVr6lM0TwgDZ8I0",
-        redirect_uri: "http://likes.tmweb.ru",
+        redirect_uri: "http://localhost:8080",
         code: code,
         grant_type: "authorization_code",
     }),
@@ -79,24 +88,27 @@ const PhotosList = (props) => {
     });
   }
 
-  if (pageNumber === 1) {
-    getList(pageNumber);
+  useEffect(() => {
+    getList(pageNumber.current);
 
-    pageNumber += 1;
-  }
+    pageNumber.current += 1;
+  }, [])
 
   return (
     <InfiniteScroll
       dataLength={photos.length}
       next={() => {
-        getList(pageNumber);
-        pageNumber += 1;
+        getList(pageNumber.current);
+        pageNumber.current += 1;
       }}
       hasMore={true}
     >
     <div
       className='container'
     >
+      <div ref={preloaderRef} className={'preloader-container-main'}>
+        <div className={'preloader'}><div></div><div></div></div>
+      </div>
       <ul
         className='photos-list'
       >
@@ -142,9 +154,9 @@ const PhotosList = (props) => {
         onClick={ev => {
           ev.preventDefault();
 
-          getList(pageNumber);
+          getList(pageNumber.current);
 
-          pageNumber += 1;
+          pageNumber.current += 1;
         }}
       >
         Загрузить ещё
