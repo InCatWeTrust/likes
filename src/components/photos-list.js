@@ -23,7 +23,7 @@ const PhotosList = (props) => {
     body: JSON.stringify({
         client_id: "010bPX24fabO7QjQIbd9bLcVQjHxcAeOVb6IzCYTNl0",
         client_secret: "aJ5ecEg3pWnsJ_mzbAAntUPX2GKfaVr6lM0TwgDZ8I0",
-        redirect_uri: "http://likes.tmweb.ru",
+        redirect_uri: "https://likes.tmweb.ru",
         code: code,
         grant_type: "authorization_code",
     }),
