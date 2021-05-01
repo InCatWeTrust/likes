@@ -10,13 +10,6 @@ const PhotosList = (props) => {
   const pageNumber = useRef(1);
   const preloaderRef = useRef('');
 
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      preloaderRef.current.style.opacity = '0';
-      preloaderRef.current.style.pointerEvents = 'none';
-    }, 300)
-  })
-
   const code = location.search.split('code=')[1];
 
   const url = 'https://unsplash.com/oauth/token';
@@ -47,7 +40,11 @@ const PhotosList = (props) => {
   }
 
   if (code && photos.length !== 0 && !token) {
-    getResourse().then(res => getToken(res));
+    getResourse()
+      .then(res => {
+        console.log('processing')
+        getToken(res);
+      })
   }
 
   async function getList(page) {
@@ -88,7 +85,12 @@ const PhotosList = (props) => {
   }
 
   useEffect(() => {
-    getList(pageNumber.current);
+    getList(pageNumber.current).then(() => {
+      setTimeout(() => {
+        preloaderRef.current.style.opacity = '0';
+        preloaderRef.current.style.pointerEvents = 'none';
+      }, 1000)
+    });
 
     pageNumber.current += 1;
   }, [])
