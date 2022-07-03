@@ -1,1 +1,1 @@
-# Дипломная работа Skillbox по курсу "Javascript с нуля"
+# Unsplash api photo feed
